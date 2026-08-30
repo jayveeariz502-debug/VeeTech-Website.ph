@@ -575,104 +575,266 @@ body{
     display: block !important;
 }
 
-/* ================= MUSIC BUTTON ================= */
-.music-btn{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    padding:12px 20px;
-    border:none;
-    border-radius:10px;
-    background:#00eaff;
-    color:black;
-    font-weight:bold;
-    cursor:pointer;
-    z-index:999;
-    box-shadow:0 0 20px #00eaff;
+/* ================= MINIMAL NEON BLUE MUSIC PLAYER ================= */
+
+.music-player {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 350px;
+    height: 90px;
+
+    background: rgba(5, 8, 18, 0.97);
+
+    border: 1px solid rgba(0, 234, 255, 0.55);
+
+    z-index: 9999;
+    overflow: hidden;
+
+    box-shadow: 0 0 8px rgba(0, 234, 255, 0.25);
+
+    backdrop-filter: blur(8px);
 }
 
-/* ================= MOBILE MEDIA QUERIES ================= */
+
+/* ================= PLAYER CONTENT ================= */
+
+.music-content {
+    display: flex;
+    align-items: center;
+
+    height: 86px;
+
+    padding: 10px 15px;
+
+    gap: 10px;
+}
+
+
+/* ================= PLAY / PAUSE ================= */
+
+.music-play {
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    background: #00eaff;
+    color: #020617;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    box-shadow: 0 0 8px rgba(0, 234, 255, 0.4);
+
+    transition: 0.3s;
+}
+
+.music-play:hover {
+    background: #ffffff;
+
+    box-shadow: 0 0 12px rgba(0, 234, 255, 0.6);
+}
+
+
+/* ================= SONG INFORMATION ================= */
+
+.music-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.music-category {
+    font-size: 7px;
+    letter-spacing: 2px;
+
+    color: #00eaff;
+
+    font-weight: bold;
+
+    margin-bottom: 3px;
+}
+
+.music-title {
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    line-height: 18px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-artist {
+    color: #777f91;
+
+    font-size: 10px;
+
+    margin-top: 3px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ================= 4 BAR MUSIC VISUALIZER ================= */
+
+.music-visualizer {
+    width: 32px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    flex-shrink: 0;
+}
+
+
+/* INDIVIDUAL BAR */
+
+.music-bar {
+    display: block;
+
+    width: 4px;
+    height: 30px;
+
+    background: #00eaff;
+
+    border-radius: 3px;
+
+    box-shadow:
+        0 0 5px rgba(0, 234, 255, 0.9),
+        0 0 10px rgba(0, 234, 255, 0.7),
+        0 0 18px rgba(0, 234, 255, 0.4);
+
+    transform: scaleY(0.15);
+
+    transform-origin: center;
+
+    transition: transform 0.08s linear;
+}
+
+
+/* ================= VOLUME ================= */
+
+.music-volume {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    flex-shrink: 0;
+}
+
+.music-volume-icon {
+    color: #8b96a8;
+
+    font-size: 12px;
+}
+
+
+/* ================= VOLUME SLIDER ================= */
+
+.volume-slider {
+    width: 55px;
+    height: 4px;
+
+    accent-color: #00eaff;
+
+    cursor: pointer;
+}
+
+
+/* ================= PROGRESS LINE ================= */
+
+.music-progress {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: #00eaff;
+
+    box-shadow: 0 0 6px rgba(0, 234, 255, 0.5);
+}
+
+
+/* ================= MOBILE ================= */
+
 @media(max-width:768px){
-    body {
-        width: 100% !important;
-        overflow-x: hidden !important;
+
+    .music-player {
+        width: 310px;
+        height: 78px;
+
+        right: 10px;
+        bottom: 10px;
+
+        box-shadow: 0 0 6px rgba(0, 234, 255, 0.25);
     }
 
-    .navbar{
-        flex-direction: column !important;
-        text-align:center !important;
-        padding: 15px 10px !important;
-        gap: 15px !important;
-        width: 100% !important;
+    .music-content {
+        height: 74px;
+
+        padding: 8px 10px;
+
+        gap: 7px;
     }
 
-    .logo-container {
-        flex-direction: row !important; 
-        justify-content: center !important;
-        align-items: center !important;
-        width: 100% !important;
-        gap: 10px !important;
+    .music-play {
+        width: 38px;
+        height: 38px;
+
+        font-size: 16px;
     }
 
-    #maliit-na-logo {
-        width: 40px !important; 
-        max-width: 40px !important;
-        height: 40px !important;
-        max-height: 40px !important;
+    .music-category {
+        font-size: 6px;
     }
 
-    .logo-text {
-        font-size: 16px !important;
-        white-space: nowrap !important; 
+    .music-title {
+        font-size: 14px;
     }
 
-    .menu {
-        width: 100% !important;
+    .music-artist {
+        font-size: 9px;
     }
 
-    .menu ul{
-        flex-direction: row !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        padding: 0 !important;
-    }
-    
-    .menu ul li {
-        background: rgba(0, 234, 255, 0.05);
-        padding: 6px 10px;
-        border-radius: 5px;
-        border: 1px solid rgba(0, 234, 255, 0.15);
+    .music-visualizer {
+        width: 26px;
+        height: 38px;
+
+        gap: 3px;
     }
 
-    .content{
-        flex-direction:column !important;
-        text-align:center !important;
-        gap: 30px !important;
-        padding-top: 30px !important;
-        width: 100% !important;
+    .music-bar {
+        width: 3px;
     }
 
-    .text-content h1{
-        font-size:32px !important;
+    .volume-slider {
+        width: 45px;
     }
 
-    .image-content {
-        order: -1 !important; 
-        min-width: 100% !important;
-    }
-
-    .large-hero-logo {
-        max-width: 220px !important;
-    }
-
-    .search{
-        justify-content:center !important;
-        width:100% !important;
-    }
-
-    .srch{ width:65% !important; }
-    .btn{ width:30% !important; }
 }
 </style>
 </head>
@@ -932,31 +1094,240 @@ body{
 
 </div>
 
-<button class="music-btn" onclick="toggleMusic()">
-🎵 Play Music
-</button>
+<!-- ================= MUSIC PLAYER ================= -->
 
+<div class="music-player">
+
+    <div class="music-content">
+
+        <!-- PLAY / PAUSE -->
+        <button
+            class="music-play"
+            onclick="toggleMusic()"
+            id="musicPlay"
+        >
+            ▶
+        </button>
+
+
+        <!-- SONG INFORMATION -->
+        <div class="music-info">
+
+            <div class="music-category">
+                VeeTech
+            </div>
+
+            <div class="music-title">
+                Alone X VeeTech
+            </div>
+
+            <div class="music-artist">
+                VeeTech Music 
+            </div>
+
+        </div>
+
+
+        <!-- 4 BAR VISUALIZER -->
+        <div
+            class="music-visualizer"
+            id="musicVisualizer"
+        >
+
+            <span class="music-bar"></span>
+            <span class="music-bar"></span>
+            <span class="music-bar"></span>
+            <span class="music-bar"></span>
+
+        </div>
+
+
+        <!-- VOLUME -->
+        <div class="music-volume">
+
+            <span class="music-volume-icon">
+                🔊
+            </span>
+
+            <input
+                type="range"
+                class="volume-slider"
+                id="volumeControl"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.5"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- PROGRESS LINE -->
+    <div class="music-progress"></div>
+
+</div>
+
+
+<!-- AUDIO -->
 <audio id="bgmusic" loop>
-<source src="sound.mp3" type="audio/mpeg">
+
+    <source
+        src="sound.mp3"
+        type="audio/mpeg"
+    >
+
 </audio>
 
 <script>
-const music = document.getElementById("bgmusic");
-const button = document.querySelector(".music-btn");
-let isPlaying = false;
 
-function toggleMusic(){
-    if(!isPlaying){
-        music.play();
-        music.volume = 0.5;
-        button.innerHTML = "⏸ Pause Music";
-        isPlaying = true;
-    }else{
+const music = document.getElementById("bgmusic");
+const playButton = document.getElementById("musicPlay");
+const volumeControl = document.getElementById("volumeControl");
+
+const bars = document.querySelectorAll(".music-bar");
+
+let isPlaying = false;
+let animationFrame = null;
+
+
+/* ================= PLAY / PAUSE ================= */
+
+function toggleMusic() {
+
+    if (!isPlaying) {
+
+        music.volume = volumeControl.value;
+
+        music.play()
+            .then(function() {
+
+                isPlaying = true;
+                playButton.innerHTML = "⏸";
+
+                startVisualizer();
+
+            })
+            .catch(function(error) {
+
+                console.error("Music error:", error);
+
+            });
+
+    } else {
+
         music.pause();
-        button.innerHTML = "🎵 Play Music";
+
         isPlaying = false;
+        playButton.innerHTML = "▶";
+
+        stopVisualizer();
+
     }
+
 }
+
+
+/* ================= VOLUME ================= */
+
+volumeControl.addEventListener("input", function() {
+
+    music.volume = this.value;
+
+});
+
+
+/* ================= VISUALIZER ================= */
+
+function startVisualizer() {
+
+    if (animationFrame) {
+        return;
+    }
+
+    function animate() {
+
+        if (!isPlaying) {
+            return;
+        }
+
+        bars.forEach(function(bar, index) {
+
+    let height;
+
+    if (index === 0) {
+        height = 0.35 + Math.random() * 0.45;
+    }
+
+    else if (index === 1) {
+        height = 0.45 + Math.random() * 0.55;
+    }
+
+    else if (index === 2) {
+        height = 0.30 + Math.random() * 0.50;
+    }
+
+    else {
+        height = 0.40 + Math.random() * 0.50;
+    }
+
+    bar.style.transform =
+        "scaleY(" + height + ")";
+
+});
+
+        animationFrame =
+            requestAnimationFrame(animate);
+
+    }
+
+    animate();
+
+}
+
+
+function stopVisualizer() {
+
+    if (animationFrame) {
+
+        cancelAnimationFrame(animationFrame);
+
+        animationFrame = null;
+
+    }
+
+    bars.forEach(function(bar) {
+
+        bar.style.transform =
+            "scaleY(0.15)";
+
+    });
+
+}
+
+
+/* ================= AUDIO EVENTS ================= */
+
+music.addEventListener("play", function() {
+
+    isPlaying = true;
+    playButton.innerHTML = "⏸";
+
+    startVisualizer();
+
+});
+
+
+music.addEventListener("pause", function() {
+
+    isPlaying = false;
+    playButton.innerHTML = "▶";
+
+    stopVisualizer();
+
+});
+
 </script>
 
 </body>
