@@ -781,60 +781,573 @@ body{
 
 /* ================= MOBILE ================= */
 
-@media(max-width:768px){
+@media (max-width: 768px) {
+
+    /* ---------- GENERAL ---------- */
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        font-size: 15px;
+    }
+
+    .main {
+        width: 100%;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+
+    /* ---------- NAVBAR ---------- */
+
+    .navbar {
+        width: 100%;
+        padding: 15px 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .logo-container {
+        width: 100%;
+        display: flex !important;
+        justify-content: center;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+
+    #maliit-na-logo {
+        width: 45px !important;
+        height: 45px !important;
+        max-width: 45px !important;
+        max-height: 45px !important;
+    }
+
+    .logo-text {
+        font-size: 17px;
+        text-align: center;
+    }
+
+
+    /* ---------- MENU ---------- */
+
+    .menu {
+        width: 100%;
+    }
+
+    .menu ul {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 8px 12px;
+        padding: 0;
+    }
+
+    .menu ul li {
+        margin: 0;
+        padding: 0;
+    }
+
+    .menu ul li a {
+        display: block;
+        font-size: 12px;
+        padding: 4px 2px;
+        white-space: nowrap;
+    }
+
+
+    /* ---------- SEARCH ---------- */
+
+    .search {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+        flex-wrap: nowrap;
+    }
+
+    .srch {
+        width: 70%;
+        min-width: 0;
+        padding: 9px 10px;
+        font-size: 14px;
+    }
+
+    .btn {
+        width: 30%;
+        padding: 9px 8px;
+        font-size: 13px;
+    }
+
+
+    /* ---------- HERO CONTENT ---------- */
+
+    .content {
+        width: 94%;
+        max-width: 100%;
+        margin: 0 auto;
+
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 25px !important;
+        padding-top: 40px !important;
+    }
+
+    .text-content {
+        width: 100%;
+        min-width: 0;
+        text-align: center;
+    }
+
+    .text-content h1 {
+        font-size: 34px;
+        line-height: 1.15;
+        word-wrap: break-word;
+    }
+
+    .par {
+        margin-top: 15px;
+        line-height: 24px;
+        font-size: 14px;
+    }
+
+    .text-content > br {
+        line-height: 10px;
+    }
+
+
+    /* ---------- FACEBOOK / CONTACT ---------- */
+
+    .text-content p[style] {
+        font-size: 13px !important;
+        line-height: 22px !important;
+        overflow-wrap: anywhere;
+    }
+
+    .text-content p[style] a {
+        overflow-wrap: anywhere;
+    }
+
+
+    /* ---------- CALL BUTTON ---------- */
+
+    .cn {
+        margin-top: 18px;
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+
+
+    /* ---------- HERO LOGO ---------- */
+
+    .image-content {
+        width: 100%;
+        min-width: 0 !important;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .large-hero-logo {
+        width: 75% !important;
+        max-width: 300px !important;
+        height: auto !important;
+    }
+
+
+    /* ---------- ABOUT ---------- */
+
+    .about-section {
+        width: 94%;
+        max-width: 100%;
+        padding: 50px 0;
+        margin: 0 auto;
+    }
+
+    .about-section h2 {
+        font-size: 27px;
+        line-height: 1.2;
+        margin-bottom: 25px;
+    }
+
+    .about-container {
+        width: 100%;
+        padding: 22px 15px;
+        border-radius: 18px;
+    }
+
+    .about-content h3 {
+        font-size: 21px;
+        line-height: 1.3;
+        margin-bottom: 15px;
+    }
+
+    .about-content p {
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 15px;
+    }
+
+    .about-services {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 25px;
+    }
+
+    .about-box {
+        width: 100%;
+        padding: 18px 12px;
+        border-radius: 13px;
+    }
+
+    .about-box h4 {
+        font-size: 18px;
+        margin: 8px 0;
+    }
+
+    .about-box p {
+        font-size: 13px;
+        line-height: 21px;
+    }
+
+    .about-developer {
+        margin-top: 25px;
+        padding: 20px 5px;
+    }
+
+    .about-developer strong {
+        font-size: 19px;
+    }
+
+
+    /* ---------- GALLERY ---------- */
+
+    .gallery {
+        width: 94%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 45px 0;
+    }
+
+    .gallery h2 {
+        font-size: 26px;
+        line-height: 1.25;
+        margin-bottom: 25px;
+    }
+
+    .gallery-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .gallery-item {
+        width: 100%;
+        min-width: 0;
+        border-radius: 15px;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
+        display: block;
+    }
+
+    .gallery-item p {
+        padding: 12px 8px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+
+    /* ---------- LAPTOP GALLERY ---------- */
+
+    .laptop-gallery .gallery-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    .laptop-gallery .gallery-item {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .laptop-gallery .gallery-item img {
+        width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+
+
+    /* ---------- BANNER SECTIONS ---------- */
+
+    #printerrepair .gallery-container,
+    #cctvinstaller .gallery-container,
+    #solarinstaller .gallery-container,
+    #thaispeaker .gallery-container {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+    }
+
+    #printerrepair .gallery-item,
+    #cctvinstaller .gallery-item,
+    #solarinstaller .gallery-item,
+    #thaispeaker .gallery-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 15px !important;
+    }
+
+    #printerrepair .gallery-item img,
+    #cctvinstaller .gallery-item img,
+    #solarinstaller .gallery-item img,
+    #thaispeaker .gallery-item img {
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+    }
+
+
+    /* =====================================================
+       MUSIC PLAYER - SMALL MOBILE VERSION
+       ===================================================== */
 
     .music-player {
-        width: 310px;
-        height: 78px;
+        position: fixed;
+
+        width: calc(100% - 20px);
+        max-width: 330px;
+
+        height: 68px;
 
         right: 10px;
         bottom: 10px;
 
-        box-shadow: 0 0 6px rgba(0, 234, 255, 0.25);
+        border-radius: 12px;
+
+        z-index: 99999;
     }
 
     .music-content {
-        height: 74px;
+        width: 100%;
+        height: 65px;
 
-        padding: 8px 10px;
+        padding: 7px 8px;
 
         gap: 7px;
     }
 
     .music-play {
-        width: 38px;
-        height: 38px;
+        width: 35px;
+        height: 35px;
 
-        font-size: 16px;
+        min-width: 35px;
+        min-height: 35px;
+
+        font-size: 14px;
+        border-radius: 50%;
+    }
+
+    .music-info {
+        flex: 1;
+        min-width: 0;
+        max-width: 120px;
     }
 
     .music-category {
         font-size: 6px;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
     }
 
     .music-title {
-        font-size: 14px;
+        font-size: 11px;
+        line-height: 14px;
     }
 
     .music-artist {
-        font-size: 9px;
+        font-size: 8px;
+        margin-top: 1px;
     }
 
     .music-visualizer {
-        width: 26px;
-        height: 38px;
+        width: 24px;
+        min-width: 24px;
 
-        gap: 3px;
+        height: 35px;
+
+        gap: 2px;
     }
 
     .music-bar {
         width: 3px;
+        height: 25px;
+    }
+
+    .music-volume {
+        gap: 3px;
+    }
+
+    .music-volume-icon {
+        font-size: 10px;
     }
 
     .volume-slider {
-        width: 45px;
+        width: 40px;
+        height: 3px;
     }
 
+    .music-progress {
+        height: 2px;
+    }
+
+
+    /* ---------- FOOTER ---------- */
+
+    footer {
+        width: 100%;
+        padding: 30px 15px !important;
+        margin-top: 30px !important;
+        font-size: 13px !important;
+        line-height: 22px;
+    }
+
+
+    /* ---------- BACKGROUND PERFORMANCE ---------- */
+
+    .light-glow {
+        width: 250px;
+        height: 250px;
+        filter: blur(70px);
+    }
+
+    .tech-grid {
+        background-size: 40px 40px;
+    }
+
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .navbar {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .logo-text {
+        font-size: 15px;
+    }
+
+    #maliit-na-logo {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .menu ul {
+        gap: 6px 9px;
+    }
+
+    .menu ul li a {
+        font-size: 11px;
+    }
+
+    .text-content h1 {
+        font-size: 29px;
+    }
+
+    .par {
+        font-size: 12px;
+        line-height: 21px;
+    }
+
+    .gallery h2 {
+        font-size: 23px;
+    }
+
+    .about-section h2 {
+        font-size: 24px;
+    }
+
+    /* Smaller music player */
+
+    .music-player {
+        width: calc(100% - 14px);
+        right: 7px;
+        bottom: 7px;
+        height: 62px;
+    }
+
+    .music-content {
+        height: 59px;
+        padding: 6px;
+        gap: 5px;
+    }
+
+    .music-play {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+        font-size: 13px;
+    }
+
+    .music-info {
+        max-width: 105px;
+    }
+
+    .music-title {
+        font-size: 10px;
+    }
+
+    .music-artist {
+        font-size: 7px;
+    }
+
+    .music-visualizer {
+        width: 20px;
+        min-width: 20px;
+    }
+
+    .music-bar {
+        width: 2px;
+    }
+
+    .volume-slider {
+        width: 32px;
+    }
+
+    .music-volume-icon {
+        display: none;
+    }
 }
 </style>
 </head>
