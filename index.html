@@ -37,21 +37,183 @@ body {
    ULTRA TECH BACKGROUND
    ========================================================= */
 
+/* =========================================================
+   NEON TECH MOUNTAIN BACKGROUND
+   ========================================================= */
+
 .tech-background {
     position: fixed;
-    top: 0;
-    left: 0;
-
+    inset: 0;
     width: 100%;
     height: 100%;
-
     overflow: hidden;
-
+    isolation: isolate;
     z-index: -5;
+    pointer-events: none;
 
     background:
-        radial-gradient(circle at top, #0ea5e9 0%, #020617 40%),
-        linear-gradient(to bottom, #020617, #000814);
+        radial-gradient(ellipse at 50% 38%, rgba(0, 115, 190, 0.22), transparent 48%),
+        radial-gradient(ellipse at 15% 70%, rgba(0, 234, 255, 0.10), transparent 38%),
+        linear-gradient(180deg, #020617 0%, #03142b 48%, #010711 100%);
+}
+
+/* Atmospheric glow behind the mountain range */
+.mountain-sky-glow {
+    position: absolute;
+    width: 70vw;
+    height: 42vw;
+    min-width: 420px;
+    min-height: 280px;
+    left: 50%;
+    top: 16%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(0, 145, 255, 0.13);
+    filter: blur(90px);
+    animation: mountainGlow 9s ease-in-out infinite alternate;
+}
+
+/* Layered mountain silhouettes */
+.mountain-range {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.mountain {
+    position: absolute;
+    left: -8%;
+    width: 116%;
+    transform: translateZ(0);
+}
+
+.mountain-back {
+    bottom: 25%;
+    height: 48%;
+    opacity: 0.72;
+    clip-path: polygon(
+        0 78%, 10% 53%, 17% 66%, 28% 20%, 36% 56%,
+        47% 10%, 57% 55%, 68% 25%, 77% 61%, 88% 32%,
+        100% 72%, 100% 100%, 0 100%
+    );
+    background:
+        linear-gradient(155deg, rgba(10, 68, 112, 0.78), rgba(2, 13, 35, 0.98) 68%);
+    filter: drop-shadow(0 0 10px rgba(0, 190, 255, 0.55));
+}
+
+.mountain-mid {
+    bottom: 12%;
+    height: 43%;
+    opacity: 0.92;
+    clip-path: polygon(
+        0 68%, 12% 38%, 21% 62%, 34% 15%, 44% 55%,
+        56% 24%, 67% 65%, 80% 20%, 90% 56%, 100% 35%,
+        100% 100%, 0 100%
+    );
+    background:
+        linear-gradient(160deg, rgba(5, 42, 82, 0.98), rgba(1, 9, 25, 1) 72%);
+    filter: drop-shadow(0 0 12px rgba(0, 234, 255, 0.42));
+}
+
+.mountain-front {
+    bottom: -2%;
+    height: 36%;
+    opacity: 0.98;
+    clip-path: polygon(
+        0 58%, 15% 28%, 25% 61%, 39% 18%, 52% 60%,
+        66% 26%, 78% 65%, 90% 30%, 100% 53%,
+        100% 100%, 0 100%
+    );
+    background:
+        linear-gradient(180deg, rgba(3, 30, 59, 0.98), #010611 76%);
+    filter: drop-shadow(0 -5px 14px rgba(0, 234, 255, 0.28));
+}
+
+/* Fine neon ridgelines */
+.mountain-ridge {
+    position: absolute;
+    left: -5%;
+    width: 110%;
+    height: 1px;
+    opacity: 0.75;
+    background: linear-gradient(90deg, transparent, rgba(0, 234, 255, 0.9), rgba(76, 190, 255, 0.55), transparent);
+    box-shadow: 0 0 8px #00cfff, 0 0 18px rgba(0, 234, 255, 0.7);
+    transform-origin: left center;
+}
+
+.ridge-one {
+    top: 48%;
+    transform: rotate(-8deg);
+}
+
+.ridge-two {
+    top: 59%;
+    transform: rotate(5deg);
+    opacity: 0.48;
+}
+
+.ridge-three {
+    top: 68%;
+    transform: rotate(-3deg);
+    opacity: 0.32;
+}
+
+/* Low perspective circuit floor */
+.tech-grid {
+    position: absolute;
+    width: 200%;
+    height: 90%;
+    left: -50%;
+    bottom: -43%;
+    top: auto;
+    opacity: 0.65;
+    background-image:
+        linear-gradient(rgba(0, 234, 255, 0.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 234, 255, 0.16) 1px, transparent 1px);
+    background-size: 58px 58px;
+    transform: perspective(850px) rotateX(68deg);
+    transform-origin: center top;
+    animation: gridMove 15s linear infinite;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 75%, transparent 100%);
+}
+
+@keyframes mountainGlow {
+    from { opacity: 0.55; transform: translateX(-50%) scale(0.94); }
+    to   { opacity: 1; transform: translateX(-50%) scale(1.08); }
+}
+
+@media (max-width: 768px) {
+    .mountain-sky-glow {
+        top: 24%;
+        width: 110vw;
+        height: 70vw;
+        filter: blur(65px);
+    }
+
+    .mountain-back {
+        bottom: 27%;
+        height: 38%;
+    }
+
+    .mountain-mid {
+        bottom: 14%;
+        height: 34%;
+    }
+
+    .mountain-front {
+        height: 28%;
+    }
+
+    .tech-grid {
+        bottom: -35%;
+        background-size: 42px 42px;
+        opacity: 0.48;
+    }
+
+    .mountain-ridge {
+        opacity: 0.42;
+    }
 }
 
 .tech-grid {
@@ -2039,6 +2201,17 @@ body {
 
 }
 
+
+@media (prefers-reduced-motion: reduce) {
+    .mountain-sky-glow,
+    .tech-grid,
+    .tech-lines span,
+    .particles span,
+    .light-glow {
+        animation: none !important;
+    }
+}
+
 </style>
 </head>
 
@@ -2051,6 +2224,17 @@ body {
      ===================================================== -->
 
 <div class="tech-background">
+
+    <div class="mountain-sky-glow"></div>
+
+    <div class="mountain-range" aria-hidden="true">
+        <div class="mountain mountain-back"></div>
+        <div class="mountain mountain-mid"></div>
+        <div class="mountain mountain-front"></div>
+        <div class="mountain-ridge ridge-one"></div>
+        <div class="mountain-ridge ridge-two"></div>
+        <div class="mountain-ridge ridge-three"></div>
+    </div>
 
     <div class="tech-grid"></div>
 
