@@ -1253,8 +1253,6 @@ body {
         0 0 18px rgba(0, 234, 255, 0.4);
 
     transform: scaleY(0.15);
-    transform-origin: center;
-    transition: transform 90ms linear;
 
     transform-origin: center;
 
@@ -1969,8 +1967,6 @@ body {
             0 0 10px rgba(0, 234, 255, 0.7);
 
         transform: scaleY(0.15);
-    transform-origin: center;
-    transition: transform 90ms linear;
 
         transform-origin: center;
 
@@ -2215,8 +2211,6 @@ body {
         animation: none !important;
     }
 }
-
-
 
 /* =========================================================
    BUSINESS REGISTRATION - DTI & BIR
@@ -2470,10 +2464,6 @@ body {
                     <a href="#solarinstaller">
                         Solar Installer
                     </a>
-                </li>
-
-                <li>
-                    <a href="#businessregistration">Business Registration</a>
                 </li>
 
             </ul>
@@ -2762,7 +2752,6 @@ body {
 
     </section>
 
-
     <!-- =================================================
          BUSINESS REGISTRATION - DTI & BIR
          ================================================= -->
@@ -2798,7 +2787,6 @@ body {
             </article>
         </div>
     </section>
-
 
     <!-- =================================================
          IPHONE BYPASS
@@ -3031,18 +3019,6 @@ body {
 
 
 
-
-
-
-
-    <div class="certificate-modal" id="certificateModal" role="dialog"
-         aria-modal="true" aria-label="Certificate image viewer" onclick="closeCertificate(event)">
-        <button class="certificate-modal-close" type="button" aria-label="Close image viewer"
-                onclick="closeCertificate()">&times;</button>
-        <img id="certificateModalImage" src="" alt="Enlarged business registration document">
-    </div>
-
-
     <!-- =================================================
          FOOTER
          ================================================= -->
@@ -3201,151 +3177,202 @@ let animationFrame = null;
 
 
 /* =====================================================
-   MUSIC PLAYER + REAL AUDIO VISUALIZER
+   PLAY / PAUSE
    ===================================================== */
-let isPlaying = false;
-let animationFrame = null;
-let audioContext = null;
-let analyser = null;
-let audioSource = null;
-let frequencyData = null;
 
-function setupAudioVisualizer() {
-    if (analyser) return;
+function toggleMusic() {
 
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContextClass) return;
-
-    try {
-        audioContext = new AudioContextClass();
-        analyser = audioContext.createAnalyser();
-        analyser.fftSize = 128;
-        analyser.smoothingTimeConstant = 0.78;
-        frequencyData = new Uint8Array(analyser.frequencyBinCount);
-
-        audioSource = audioContext.createMediaElementSource(music);
-        audioSource.connect(analyser);
-        analyser.connect(audioContext.destination);
-    } catch (error) {
-        console.warn('Audio visualizer setup failed; using animated fallback.', error);
-        analyser = null;
-    }
-}
-
-async function toggleMusic() {
     if (!isPlaying) {
-        music.volume = Number(volumeControl.value);
-        setupAudioVisualizer();
 
-        if (audioContext && audioContext.state === 'suspended') {
-            try { await audioContext.resume(); } catch (error) {
-                console.warn('Could not resume audio context:', error);
-            }
-        }
+        music.volume =
+            volumeControl.value;
 
-        try {
-            await music.play();
-        } catch (error) {
-            console.error('Music error:', error);
-        }
+        music.play()
+            .then(function () {
+
+                isPlaying = true;
+
+                playButton.innerHTML = "⏸";
+
+                startVisualizer();
+
+            })
+            .catch(function (error) {
+
+                console.error(
+                    "Music error:",
+                    error
+                );
+
+            });
+
     } else {
+
         music.pause();
+
+        isPlaying = false;
+
+        playButton.innerHTML = "▶";
+
+        stopVisualizer();
+
     }
+
 }
 
-volumeControl.addEventListener('input', function () {
-    music.volume = Number(this.value);
-});
+
+/* =====================================================
+   VOLUME
+   ===================================================== */
+
+volumeControl.addEventListener(
+    "input",
+    function () {
+
+        music.volume = this.value;
+
+    }
+);
+
+
+/* =====================================================
+   VISUALIZER
+   ===================================================== */
 
 function startVisualizer() {
-    if (animationFrame !== null) return;
+
+    if (animationFrame) {
+        return;
+    }
+
 
     function animate() {
+
         if (!isPlaying) {
-            animationFrame = null;
             return;
         }
 
-        if (analyser && frequencyData) {
-            analyser.getByteFrequencyData(frequencyData);
-        }
 
-        bars.forEach(function (bar, index) {
-            let level;
-            if (analyser && frequencyData) {
-                const bin = Math.min(index * 3 + 2, frequencyData.length - 1);
-                level = frequencyData[bin] / 255;
-            } else {
-                level = 0.2 + Math.random() * 0.75;
+        bars.forEach(
+            function (bar, index) {
+
+                let height;
+
+
+                if (index === 0) {
+
+                    height =
+                        0.35 +
+                        Math.random() * 0.45;
+
+                }
+
+                else if (index === 1) {
+
+                    height =
+                        0.45 +
+                        Math.random() * 0.55;
+
+                }
+
+                else if (index === 2) {
+
+                    height =
+                        0.30 +
+                        Math.random() * 0.50;
+
+                }
+
+                else {
+
+                    height =
+                        0.40 +
+                        Math.random() * 0.50;
+
+                }
+
+
+                bar.style.transform =
+                    "scaleY(" +
+                    height +
+                    ")";
+
             }
+        );
 
-            const scale = Math.max(0.12, 0.18 + level * 1.65);
-            bar.style.transform = 'scaleY(' + scale + ')';
-        });
 
-        animationFrame = requestAnimationFrame(animate);
+        animationFrame =
+            requestAnimationFrame(
+                animate
+            );
+
     }
 
-    animationFrame = requestAnimationFrame(animate);
+
+    animate();
+
 }
 
-function stopVisualizer() {
-    if (animationFrame !== null) {
-        cancelAnimationFrame(animationFrame);
-        animationFrame = null;
-    }
-
-    bars.forEach(function (bar) {
-        bar.style.transform = 'scaleY(0.15)';
-    });
-}
-
-music.addEventListener('play', function () {
-    isPlaying = true;
-    playButton.innerHTML = '⏸';
-    startVisualizer();
-});
-
-music.addEventListener('pause', function () {
-    isPlaying = false;
-    playButton.innerHTML = '▶';
-    stopVisualizer();
-});
-
-music.addEventListener('ended', function () {
-    isPlaying = false;
-    playButton.innerHTML = '▶';
-    stopVisualizer();
-});
 
 /* =====================================================
-   DTI / BIR CERTIFICATE IMAGE VIEWER
+   STOP VISUALIZER
    ===================================================== */
-function openCertificate(imageSource, imageDescription) {
-    const modal = document.getElementById("certificateModal");
-    const modalImage = document.getElementById("certificateModalImage");
-    modalImage.src = imageSource;
-    modalImage.alt = imageDescription;
-    modal.classList.add("is-open");
-    document.body.style.overflow = "hidden";
-}
 
-function closeCertificate(event) {
-    const modal = document.getElementById("certificateModal");
-    if (event && event.target !== modal) return;
-    modal.classList.remove("is-open");
-    document.body.style.overflow = "";
-}
+function stopVisualizer() {
 
-document.addEventListener("keydown", function(event) {
-    if (event.key === "Escape") {
-        const modal = document.getElementById("certificateModal");
-        if (modal && modal.classList.contains("is-open")) {
-            modal.classList.remove("is-open");
-            document.body.style.overflow = "";
-        }
+    if (animationFrame) {
+
+        cancelAnimationFrame(
+            animationFrame
+        );
+
+        animationFrame = null;
+
     }
-});
+
+
+    bars.forEach(
+        function (bar) {
+
+            bar.style.transform =
+                "scaleY(0.15)";
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   AUDIO EVENTS
+   ===================================================== */
+
+music.addEventListener(
+    "play",
+    function () {
+
+        isPlaying = true;
+
+        playButton.innerHTML = "⏸";
+
+        startVisualizer();
+
+    }
+);
+
+
+music.addEventListener(
+    "pause",
+    function () {
+
+        isPlaying = false;
+
+        playButton.innerHTML = "▶";
+
+        stopVisualizer();
+
+    }
+);
 
 </script>
 
