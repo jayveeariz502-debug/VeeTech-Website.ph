@@ -3519,5 +3519,109 @@ music.addEventListener(
 </script>
 
 
+
+<!-- =====================================================
+     VeeTech SEARCH NAVIGATION
+     Search a service and jump directly to its section
+     ===================================================== -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".search .srch");
+    const searchButton = document.querySelector(".search .btn");
+
+    if (!searchInput || !searchButton) return;
+
+    // Keywords are matched without regard to uppercase/lowercase.
+    const serviceKeywords = [
+        {
+            section: "printerrepair",
+            words: ["printer", "printers", "printer repair", "printing"]
+        },
+        {
+            section: "laptoprepair",
+            words: ["laptop", "laptops", "pc", "computer", "desktop", "pc build", "laptop repair"]
+        },
+        {
+            section: "iphonebypass",
+            words: ["iphone", "iphone bypass", "bypass", "ios bypass", "cellphone", "phone"]
+        },
+        {
+            section: "cctvinstaller",
+            words: ["cctv", "camera", "security camera", "cctv installer", "cctv installation"]
+        },
+        {
+            section: "solarinstaller",
+            words: ["solar", "solar panel", "solar installer", "solar installation", "solar repair"]
+        },
+        {
+            section: "about",
+            words: ["about", "about us", "services", "service"]
+        },
+        {
+            section: "businessregistration",
+            words: ["business registration", "dti", "bir", "registration"]
+        },
+        {
+            section: "applecertification",
+            words: ["apple certification", "apple tech", "certification"]
+        }
+    ];
+
+    function runServiceSearch() {
+        const query = searchInput.value
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, " ");
+
+        if (!query) {
+            searchInput.focus();
+            return;
+        }
+
+        // Prefer an exact keyword match, then allow a phrase to contain a keyword.
+        let match = serviceKeywords.find(item =>
+            item.words.some(word => query === word)
+        );
+
+        if (!match) {
+            match = serviceKeywords.find(item =>
+                item.words.some(word => query.includes(word) || word.includes(query))
+            );
+        }
+
+        if (!match) {
+            alert("Sorry, walang section na tumutugma sa \"" + searchInput.value.trim() + "\". Subukan ang Printer, Laptop, CCTV, Solar, o iPhone Bypass.");
+            return;
+        }
+
+        const destination = document.getElementById(match.section);
+
+        if (!destination) {
+            alert("Hindi makita ang service section na iyon. Pakisubukan ulit.");
+            return;
+        }
+
+        destination.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+        // Update the address-bar hash without reloading the website.
+        if (history.replaceState) {
+            history.replaceState(null, "", "#" + match.section);
+        }
+    }
+
+    searchButton.addEventListener("click", runServiceSearch);
+
+    searchInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            runServiceSearch();
+        }
+    });
+});
+</script>
+
 </body>
 </html>
